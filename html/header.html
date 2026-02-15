@@ -1,0 +1,70 @@
+<div class="shadow-lg  mx-auto md:px-4 fixed w-full bg-(--bg) top-0 z-50 animate-top px-1">
+  <div class="flex h-16 items-center justify-between">
+    <!-- Left: Logo + Nav -->
+    <div class="flex items-center md:gap-4 gap-2">
+      <!-- Mobile menu button -->
+      <button class="md:hidden text-xl" id="burgerIcon"> <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="#home" class="text-xl font-bold uppercase font-(family-name:--fsecond)">
+        Trendora
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-2 text-sm lg:text-base lg:gap-6">
+        <a class="nav-link" href="#products">Shop</a>
+        <a class="nav-link" href="#top-selling">On Sale</a>
+        <a class="nav-link" href="#products?gender=men">Men</a>
+        <a class="nav-link" href="#products?gender=women">Women</a>
+        <a class="nav-link" href="#products?gender=kids">Kids</a>
+      </nav>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center md:gap-2 gap-1">
+      <!-- Search -->
+      <form id="search-form" class="hidden md:block relative group">
+        <i
+          class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 opacity-40 group-focus-within:opacity-100 transition-opacity"></i>
+        <input type="search"
+          class="bg-(--bgsecond) text-(--onbg) rounded-full py-2 pl-4 pr-10 outline-none border border-transparent focus:border-(--onbg)/20 transition-all w-48 lg:w-64"
+          id="search-input" autocomplete="off" placeholder="Search products..." />
+        <div id="search-results" class="bg-(--bgsecond) text-(--onbg) absolute w-full z-50 rounded-xl mt-1"></div>
+      </form>
+
+
+      <!-- Theme -->
+      <button id="theme-toggle"
+        class="p-2.5 rounded-full bg-(--bgsecond) text-(--onbg) active:scale-90 transition hover:bg-(--onbg) hover:text-(--bg)">
+        <span id="sun-icon" class="hidden text-sm">☀️</span>
+        <span id="moon-icon" class="text-sm">🌙</span>
+      </button>
+
+      <!-- Cart -->
+      <a href="#cart" class="p-2.5 rounded-full hover:bg-(--bgsecond) transition text-lg">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </a>
+
+      <div id="auth-buttons"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu"
+  class="md:hidden origin-top scale-y-0 opacity-0 fixed left-0 right-0 top-16 z-40 transition-all duration-300 ease-out bg-(--bg) border-b border-(--onbg) shadow-xl">
+  <nav class="flex flex-col gap-2 p-4">
+    <a class="mobile-link text-lg font-medium" href="#products">Shop</a>
+    <a class="mobile-link text-lg font-medium" href="#top-selling">On Sale</a>
+    <a class="mobile-link text-lg font-medium" href="#new-arrival">New Arrivals</a>
+    <a class="mobile-link text-lg font-medium" href="#cart">Cart</a>
+
+    <div class="relative mt-4">
+      <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 opacity-40"></i>
+      <input type="search" placeholder="Search..." id="mobile-search-input"
+        class="w-full p-3 pl-10 rounded-xl bg-(--bgsecond) outline-none border border-transparent focus:border-(--onbg)/20" />
+      <div id="mobile-search-results" class="bg-white text-black absolute w-full z-50 rounded-xl mt-1 left-0">
+      </div>
+  </nav>
+</div>

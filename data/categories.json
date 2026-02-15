@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "T-Shirts",
+        "slug": "t-shirts",
+        "mainImage": "/assets/images/categories/t-shirt.jpg",
+        "description": "All types of T-Shirts",
+        "isActive": true,
+        "order": 1
+    },
+    {
+        "id": 2,
+        "name": "Shirts",
+        "slug": "shirts",
+        "mainImage": "/assets/images/categories/shirt.jpg",
+        "description": "Casual and formal shirts",
+        "isActive": true,
+        "order": 2
+    },
+    {
+        "id": 3,
+        "name": "Shorts",
+        "slug": "shorts",
+        "mainImage": "/assets/images/categories/shorts.jpg",
+        "description": "Comfortable shorts",
+        "isActive": true,
+        "order": 3
+    },
+    {
+        "id": 4,
+        "name": "Jeans",
+        "slug": "jeans",
+        "mainImage": "/assets/images/categories/jeans.jpg",
+        "description": "Denim jeans collection",
+        "isActive": true,
+        "order": 4
+    },
+    {
+        "id": 6,
+        "name": "Hoodies",
+        "slug": "Hoodies",
+        "mainImage": "/assets/images/product/Relaxed Fit Hoodie3.avif",
+        "description": "hoodie collection",
+        "isActive": true,
+        "order": 4
+    }
+]

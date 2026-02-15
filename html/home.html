@@ -1,0 +1,87 @@
+<section class="relative w-full h-[80vh] md:h-[80vh] lg:h-[90vh] overflow-hidden bg-neutral-900 pt-12">
+
+  <!-- === SLIDES WRAPPER (flex, dynamic transform via JS) === -->
+  <div id="sliderWrapper" class="flex h-full w-full slide-transition will-change-transform">
+
+    <!-- slide 1 -->
+    <div class="relative w-full h-full shrink-0">
+      <img src="/assets/images/hero1.png" alt="hero visual 1" class="w-full h-full object-cover object-top">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="absolute inset-0 flex  items-center justify-end text-center  text-white px-4">
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-shadow w-full md:w-full lg:w-1/2 animate-top">
+          Unwind in
+          style,<br>
+          Explore Cozy<br>
+          Loungewear</h2>
+      </div>
+    </div>
+
+    <!-- slide 2 -->
+    <div class="relative w-full h-full shrink-0">
+      <img src="/assets/images/hero2.png" alt="hero visual 2" class="w-full h-full object-cover object-top">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div
+        class="absolute inset-0 flex  items-center justify-center  md:justify-end md:items-end   text-center text-white px-4 pb-10">
+        <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-shadow animate-top">It's All in Details,<br>
+          Quality Craftsmanship</h2>
+      </div>
+    </div>
+
+    <!-- slide 3 -->
+    <div class="relative w-full h-full shrink-0">
+      <img src="/assets/images/hero3.png" alt="hero visual 3" class="w-full h-full object-cover object-top">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="absolute inset-0 flex flex-col items-start justify-center  text-white px-4">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-shadow animate-top">New Season,<br>
+          New You.
+        </h2>
+        <p class="text-lg md:text-2xl max-w-2xl text-shadow/90">Discover the Spring Collection</p>
+      </div>
+    </div>
+
+    <!-- slide 4 -->
+    <div class="relative w-full h-full shrink-0">
+      <img src="/assets/images/hero4.png" alt="hero visual 4" class="w-full h-full object-cover object-top">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="absolute inset-0 flex flex-col items-start justify-center  text-white px-4">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-shadow animate-top">Elevate Your <br> Everyday.
+        </h2>
+        <p class="text-lg md:text-2xl max-w-2xl text-shadow/90">Shop the city Chic Edit</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="new-arrivals py-16">
+  <div class="container w-3/4 mx-auto">
+    <h2 class="text-4xl md:text-6xl font-bold text-center tracking-tight mb-16">
+      New Arrivals
+    </h2>
+    <div class="flex flex-col md:flex-row w-full overflow-hidden rounded-2xl" id="new-arrivals">
+
+
+    </div>
+  </div>
+</section>
+<section class="top-selling" id="top-selling">
+  <div class="py-5 px-4 md:px-16 lg:px-24">
+    <h2 class="text-4xl md:text-6xl font-bold text-center tracking-tight mb-16">
+      Best Deals
+    </h2>
+    <div id="top" class="container-with-scroll flex justify-between gap-4 overflow-y-visible overflow-x-auto mb-5">
+      <!-- Product Cards Here -->
+    </div>
+    <a class="block m-auto w-fit border border-(--border) py-2 px-5 rounded-2xl hover:bg-(--main-text) hover:text-(--main-bg) transition duration-300"
+      href="#products">View All</a>
+  </div>
+</section>
+
+
+<section class="py-5">
+  <h2 class="ml-5 mb-4 uppercase leading-tight font-bold text-2xl">
+    Our happy customers
+  </h2>
+  <div id="rev" class="container-with-scroll flex justify-between gap-4 p-5 overflow-y-visible overflow-x-auto mb-5">
+    <!-- Review Cards Here -->
+  </div>
+</section>

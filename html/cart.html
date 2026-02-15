@@ -1,0 +1,64 @@
+<section class="min-h-screen pb-12  bg-(--bg) text-(--onbg)  transition-colors duration-300 mt-12 pt-10">
+    <div class="container w-4/5 mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            <div>
+                <div id="loadingCart" class="text-center py-12 hidden">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-(--onbg)"></i>
+                    <p class="mt-2 text-(--onbg)/70">Loading cart...</p>
+                </div>
+                <div id="cartItems" class="space-y-4"></div>
+                <div id="emptyCart" class="hidden text-center py-12 opacity-50">
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+
+            <div
+                class=" p-8 rounded-3xl mb-8 shadow-md shadow-cyan-100 bg-(--sec-bg) border-2 border-(--onbg)/20 transition-all duration-300 hover:shadow-3xl backdrop-blur-sm">
+
+                <h2 class="text-2xl font-bold mb-8 text-(--onbg) tracking-wide">Order Summary</h2>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between text-(--onbg)/90">
+                        <span class="font-medium">Subtotal</span>
+                        <span id="subtotal" class="font-semibold transition-colors duration-300">$0</span>
+                    </div>
+
+                    <div class="flex justify-between text-red-600">
+                        <span class="font-medium">Discount</span>
+                        <span id="discount" class="font-semibold transition-colors duration-300">-$0</span>
+                    </div>
+
+                    <div class="flex justify-between text-(--onbg)/90 pb-8 border-b border-b-(--onbg)/20">
+                        <span class="font-medium">Delivery</span>
+                        <span id="delivery" class="font-semibold transition-colors duration-300">$0</span>
+                    </div>
+
+                    <div class="flex justify-between text-xl font-bold text-(--onbg)">
+                        <span>Total</span>
+                        <span id="total" class="transition-colors duration-300">$0</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-center mb-6 mt-8 flex-wrap gap-3">
+                    <input type="text" id="promoCode" placeholder="Enter promo code"
+                        class="rounded-full border p-3 border-(--onbg)/20 bg-(--bg) text-(--onbg) grow transition-colors duration-300 focus:outline-none focus:border-(--onbg)/40 placeholder-(--onbg)/50">
+                    <button id="applyPromo"
+                        class="rounded-full bg-(--onbg) text-(--bg) px-6 py-3 transition-all duration-300 hover:opacity-90 active:scale-95 font-medium">
+                        Apply
+                    </button>
+                </div>
+                <p id="promoMessage" class="text-green-500 mt-1 transition-colors duration-300 text-center"></p>
+
+                <button id="checkoutBtn"
+                    class="w-full mt-8 bg-(--onbg) text-(--bg) py-4 rounded-full transition-all duration-300 hover:bg-opacity-90 hover:scale-105 active:scale-95 font-bold uppercase tracking-wide shadow-lg">
+                    Go to Checkout
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</section>

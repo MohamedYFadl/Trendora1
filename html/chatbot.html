@@ -1,0 +1,83 @@
+<!-- Button used to open the chatbot window -->
+<button id="openChat"
+    class="fixed bottom-6 right-6 bg-(--onbg) text-(--bg) w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:opacity-90 transition active:scale-95 z-50">
+    🤖
+</button>
+
+<!-- Main chatbot window (hidden by default) -->
+<div id="chat-window"
+    class="fixed bottom-24 right-6 w-90 max-w-[90%] h-[70vh] border border-(--bgsecond) rounded-2xl shadow-2xl flex-col bg-(--bg) hidden font-(family-name:--fprime) z-50 overflow-hidden"
+    style="max-height: 70vh;">
+
+    <!-- Chat header / title bar -->
+    <div class="bg-(--onbg) text-(--bg) p-4 flex justify-between items-center sticky top-0 z-10 shadow-md shrink-0">
+        <div class="flex items-center gap-2">
+            <!-- Online status indicator -->
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+
+            <!-- Chatbot title -->
+            <span class="font-bold font-(family-name:--fsecond) uppercase tracking-wider text-sm">
+                Store Assistant 🤖
+            </span>
+
+        </div>
+
+        <!-- Button to close the chatbot -->
+        <button id="closeChat" class="text-(--bg) text-2xl hover:rotate-90 transition-transform">
+            &times;
+        </button>
+
+    </div>
+
+    <!-- Messages container (scrollable) -->
+    <div id="messages" class="flex-1 p-4 overflow-y-auto space-y-4 scrollbar-hide bg-(--bg)">
+
+        <!-- Initial bot welcome message -->
+        <div class="flex justify-start animate-slide-up">
+            <div
+                class="bg-(--bgsecond) text-(--onbg) px-4 py-3 rounded-2xl rounded-tl-none shadow-sm border border-(--onbg)/5 max-w-[85%] text-sm leading-relaxed">
+                <p>Hello! 👋 I'm your AI shopping assistant.</p>
+                <p class="mt-1 opacity-60 text-xs">
+                    Try asking about
+                    <span class="text-blue-500 font-medium">products</span>,
+                    <span class="text-blue-500 font-medium">shipping</span>, or
+                    <span class="text-blue-500 font-medium">prices</span>or
+                    <span class="text-blue-500 font-medium">orders</span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Input area for user messages -->
+    <div class="p-4 bg-(--bg) border-t border-(--bgsecond) rounded-b-2xl shrink-0">
+
+        <!-- Input wrapper -->
+        <div
+            class="flex items-center space-x-2 bg-(--bgsecond)/50 rounded-full px-5 py-3 border border-transparent focus-within:border-(--onbg)/20 transition-all shadow-inner">
+
+            <!-- Text input field -->
+            <input id="userInput" type="text" placeholder="Type your question..."
+                class="flex-1 bg-transparent text-sm text-(--onbg) placeholder:opacity-30 focus:outline-none w-full font-medium" />
+
+            <!-- Send message button -->
+            <button id="sendMsgBtn"
+                class="p-2 bg-(--onbg) text-(--bg) rounded-full hover:opacity-80 transition disabled:opacity-30 disabled:cursor-not-allowed transform active:scale-90">
+
+                <!-- Send icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Footer / branding -->
+        <div class="text-center mt-3">
+            <p class="text-[10px] text-(--onbg) opacity-30 uppercase tracking-widest font-bold">
+                Powered by AI Store • v2.0
+            </p>
+        </div>
+
+    </div>
+</div>

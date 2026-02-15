@@ -1,0 +1,187 @@
+<section class="w-11/12 container mx-auto mb-20 pt-14">
+    <div class="w-full my-5">
+        <span class="text-(--main-text) opacity-70 text-xs">Home</span>
+        <i class="fa-solid fa-angle-right text-xs"></i>
+        <span class="text-(--main-text) opacity-70 text-xs selectedCategory">All Categories</span>
+    </div>
+    <div class="flex justify-between justify-items-center gap-6">
+        <div
+            class="filters basis-1/4 border border-(--bgsecond) p-2 rounded-2xl h-fit transition-all duration-500 ease-in-out  max-md:mt-16">
+            <div class="flex justify-between items-center pb-5  p-2 border-b border-b-(--bgsecond) ">
+                <h2 class="text-xl font-semibold ">Filters</h2>
+                <i class="fa-solid fa-xmark md:hidden! cursor-pointer" id="closeBtn"></i>
+            </div>
+            <div class="border-b border-b-(--bgsecond)">
+                <div class="flex justify-between items-center mb-3  p-2  cursor-pointer section-header transition-all duration-500 ease-in-out max-md:-left-1.5"
+                    data-section="categories">
+                    <h2 class="text-sm font-semibold ">Category</h2>
+                    <i class="fa-solid fa-angle-up transition-all duration-700 ease-in-out rotate-0"></i>
+                </div>
+                <ul class="filter-list section-content mb-2 overflow-hidden opacity-100 transition-all duration-1000 "
+                    id="categories">
+                </ul>
+            </div>
+            <div class="price-filter border-b border-(--bgsecond)">
+                <div class="flex justify-between items-center mb-3  p-2  cursor-pointer section-header transition-all duration-500 ease-in-out"
+                    data-section="price">
+                    <h2 class="text-sm font-semibold ">Price</h2>
+                    <i class="fa-solid fa-angle-up transition-all duration-700 ease-in-out rotate-0"></i>
+                </div>
+                <div id="price" class="section-content mb-2 overflow-hidden opacity-100 transition-all duration-1000">
+                    <div class="range-container relative h-2 my-5">
+                        <div class="slider-track absolute h-1 w-full bg-(--bg) top-1/2 -translate-y-1/2 rounded-xs"
+                            id="sliderTrack"></div>
+                        <input type="range" id="minRange" min="0" max="1000" value="50"
+                            class="absolute w-full pointer-events-none appearance-none h-1 ">
+                        <input type="range" id="maxRange" min="0" max="1000" value="500"
+                            class="absolute w-full pointer-events-none appearance-none h-1 ">
+                    </div>
+                    <div class="price-values flex justify-around items-center">
+                        <span id="minPrice">$ 50</span>
+                        <span id="maxPrice">$ 200</span>
+                    </div>
+                </div>
+            </div>
+            <div class="size-filter border-b border-(--bgsecond) ">
+                <div class="flex justify-between items-center mb-3   p-2  cursor-pointer section-header transition-all duration-500 ease-in-out"
+                    data-section="size">
+                    <h2 class="text-sm font-semibold ">Size</h2>
+                    <i class="fa-solid fa-angle-up transition-all duration-700 ease-in-out rotate-0"></i>
+                </div>
+                <div class="section-content flex flex-wrap gap-1 mb-2 overflow-hidden opacity-100 transition-all duration-1000"
+                    id="size">
+                    <span
+                        class="size-item   text-sm cursor-pointer  rounded-2xl py-2 px-3.5 bg-(--sec-bg) text-(--main-text) opacity-70"
+                        data-value="XXS">XX-Small</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="XS">X-Small</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="S">Small</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="M">Medium</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="L">Large</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="XL">X-Large</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="XXL">XX-Large</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="XXXL">3X-Large</span>
+                    <span
+                        class="   text-sm cursor-pointer size-item rounded-2xl py-2 px-3.5 bg-(--sec-bg)  text-(--main-text) opacity-70"
+                        data-value="XXXXL">4X-Large</span>
+                </div>
+            </div>
+            <div class="dress-filter border-b border-b-(--bgsecond)">
+                <div class="flex justify-between items-center pb-5  p-2  cursor-pointer section-header transition-all duration-500 ease-in-out"
+                    data-section="dress">
+                    <h2 class="text-sm font-semibold ">Dress style</h2>
+                    <i class="fa-solid fa-angle-up transition-all duration-700 ease-in-out rotate-0"></i>
+                </div>
+                <ul class="filter-list section-content mb-2 overflow-hidden opacity-100 transition-all duration-1000"
+                    id="dress">
+                    <li class="style flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm "
+                        data-value="Casual">
+                        <span>Casual</span>
+                        <span>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </span>
+                    </li>
+                    <li class="style flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm"
+                        data-value="formal">
+                        <span>Formal</span><span><i class="fa-solid fa-angle-right"></i></span>
+                    </li>
+                    <li class="style flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm"
+                        data-value="party">
+                        <span>Party</span>
+                        <span><i class="fa-solid fa-angle-right"></i>
+                        </span>
+                    </li>
+                    <li class="style flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm "
+                        data-value="gym">
+                        <span>Gym</span><span><i class="fa-solid fa-angle-right"></i></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="gender-filter border-b border-b-(--bgsecond)">
+                <div class="flex justify-between items-center pb-5  p-2  cursor-pointer section-header transition-all duration-500 ease-in-out"
+                    data-section="gender">
+                    <h2 class="text-sm font-semibold ">Gender</h2>
+                    <i class="fa-solid fa-angle-up transition-all duration-700 ease-in-out rotate-0"></i>
+                </div>
+                <ul class="filter-list section-content mb-2 overflow-hidden opacity-100 transition-all duration-1000"
+                    id="gender">
+                    <li class="gender flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm "
+                        data-value="men">
+                        <span>Men</span>
+                        <span>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </span>
+                    </li>
+                    <li class="gender flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm"
+                        data-value="women">
+                        <span>Women</span><span><i class="fa-solid fa-angle-right"></i></span>
+                    </li>
+                    <li class="gender flex justify-between items-center p-3.5  cursor-pointer text-(--main-text)  text-sm"
+                        data-value="kids">
+                        <span>Kids</span>
+                        <span><i class="fa-solid fa-angle-right"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex justify-center items-center my-4">
+                <button
+                    class="px-4 py-2 cursor-pointer bg-(--onbg) text-(--main-bg) rounded-2xl text-sm hover:bg-slate-700 w-3/4"
+                    id="btnFilter">Apply
+                    Filter</button>
+            </div>
+        </div>
+        <div class="products basis-full  md:basis-3/4">
+            <div id="emptyState" class="hidden text-center py-16">
+                <p class="text-lg font-semibold mb-2">
+                    No products match your selected filters.
+                </p>
+                <p class="text-sm text-gray-500">
+                    Try adjusting or clearing some filters.
+                </p>
+                <button id="clearFiltersBtn" class="mt-6 px-6 py-2 bg-(--onbg) text-(--main-bg) rounded-full">
+                    Clear all filters
+                </button>
+            </div>
+            <div class="products-heading flex  items-center p-2 justify-between">
+                <h2 class="font-semibold text-2xl md:text-3xl selectedCategory">All Categories</h2>
+                <div class="font-semibold opacity-100 hidden md:block">
+                    <p class="text-(--main-text) opacity-70 text-sm md:text-base"> Sort by
+                        <select id="sort">
+                            <option value="default" class="bg-(--bgsecond)">Recommended</option>
+                            <option value="price-asc" class="bg-(--bgsecond)">Price: Low to High</option>
+                            <option value="price-desc" class="bg-(--bgsecond)">Price: High to Low</option>
+                            <option value="name-asc" class="bg-(--bgsecond)">Name: A → Z</option>
+                            <option value="name-desc" class="bg-(--bgsecond)">Name: Z → A</option>
+                            <option value="rating" class="bg-(--bgsecond)">Top Rated</option>
+                        </select>
+                </div>
+                <i class="fa-solid fa-sliders max-sm:block md:hidden! transition-all ml-5 cursor-pointer"
+                    id="settings"></i>
+            </div>
+            <div class="product-items grid max-sm:grid-cols-1    max-lg:grid-cols-2 lg:grid-cols-3 gap-4">
+            </div>
+            <div class="pagination flex justify-between my-6 items-center">
+                <button class="py-2 px-4 border border-(--bgsecond) text-(--main-text) rounded-xl cursor-pointer"
+                    id="prevBtn"><i class="mr-2 fa-solid fa-arrow-left"></i>Previous</button>
+                <ul class="page-index flex justify-center items-center gap-5">
+                </ul>
+                <button class="py-2 px-4 border border-(--bgsecond) text-(--main-text) rounded-xl cursor-pointer"
+                    id="nextBtn">Next<i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </div>
+    </div>
+</section>

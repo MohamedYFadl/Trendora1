@@ -1,0 +1,223 @@
+<section class="min-h-screen pb-12 bg-(--bg) text-(--onbg) p-4 md:p-8 transition-colors duration-300 pt-14 mt-10">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 tracking-tight">Checkout</h1>
+        <div class="max-w-4xl w-full bg-(--bg) rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200">
+            <!-- ========== HORIZONTAL STEPPER ========== -->
+            <div class="flex items-center justify-center mb-8">
+                <!-- step 1 - shipping (always visible) -->
+                <div class="flex items-center flex-1">
+                    <div class="flex flex-col items-center relative">
+                        <div id="step1-indicator"
+                            class="w-10 h-10 rounded-full bg-(--bg) text-(--onbg) flex items-center justify-center font-bold border-2 border-(--bg)">
+                            <span id="step1-icon" class="text-sm">1</span>
+                        </div>
+                        <span class="text-xs font-medium mt-1 text-(--bg)" id="step1-label">Shipping</span>
+                    </div>
+                    <div class="step-connector" id="connector1"></div>
+                </div>
+
+                <!-- step 2 - payment (initially locked) -->
+                <div class="flex items-center flex-1">
+                    <div class="flex flex-col items-center relative">
+                        <div id="step2-indicator"
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold border-2 border-gray-200">
+                            <span id="step2-icon" class="text-sm">2</span>
+                        </div>
+                        <span class="text-xs font-medium mt-1 text-gray-400" id="step2-label">Payment</span>
+                    </div>
+                    <div class="step-connector" id="connector2"></div>
+                </div>
+
+                <!-- step 3 - confirm (initially locked) -->
+                <div class="flex items-center">
+                    <div class="flex flex-col items-center relative">
+                        <div id="step3-indicator"
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold border-2 border-gray-200">
+                            <span id="step3-icon" class="text-sm">3</span>
+                        </div>
+                        <span class="text-xs font-medium mt-1 text-gray-400" id="step3-label">Confirm</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== PANELS ========== -->
+            <div class="py-4">
+                <!-- STEP 1: SHIPPING (always active first) -->
+                <div id="panel1" class="step-panel active-panel">
+                    <h2 class="text-xl font-semibold text-(--main-text) mb-5">🚚 Shipping information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Full Name *</label><input
+                                type="text" id="fullName"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="John Doe"></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Mobile Number
+                                *</label><input type="tel" id="mobile"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="+20 123 456 789"></div>
+                        <div>
+                            <label class="block text-sm font-medium text-(--main-text) mb-1">Email Address *</label>
+                            <input type="email" id="email" disabled
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="hello@example.com">
+                        </div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Region *</label><input
+                                type="text" id="region"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="Cairo / Alexandria"></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">City *</label><input
+                                type="text" id="city"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="Giza / 6th October"></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Street Name
+                                *</label><input type="text" id="street"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="El Tahrir st."></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Building name / number
+                                *</label><input type="text" id="building"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="Building 12 / Omar Tower"></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Floor</label><input
+                                type="text" id="floor"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="5th"></div>
+                        <div><label class="block text-sm font-medium text-(--main-text) mb-1">Zip code</label><input
+                                type="text" id="zip"
+                                class="w-full border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 outline-none"
+                                placeholder="12345"></div>
+                    </div>
+                    <!-- hint about next steps -->
+                    <p class="text-sm text-blue-600 mt-4"><i class="fas fa-info-circle mr-1"></i> After saving, payment
+                        and
+                        confirmation become available.</p>
+                </div>
+
+                <!-- STEP 2: PAYMENT (initially hidden) -->
+                <div id="panel2" class="step-panel">
+                    <h2 class="text-xl font-semibold text-(--main-text) mb-5">💳 Payment method</h2>
+
+                    <!-- payment choice radios -->
+                    <div class="space-y-3">
+                        <label
+                            class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-(--bgsecond) transition border-gray-200">
+                            <input type="radio" name="paymentMethod" value="card" class="w-5 h-5 text-blue-600" checked>
+                            <span class="ml-3 text-(--main-text) font-medium">Credit / Debit Card</span>
+                            <span class="ml-auto text-sm text-gray-400"><i
+                                    class="fas fa-credit-card text-lg"></i></span>
+                        </label>
+                        <label
+                            class="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-(--bgsecond) transition border-gray-200">
+                            <input type="radio" name="paymentMethod" value="cash" class="w-5 h-5 text-blue-600">
+                            <span class="ml-3 text-(--main-text) font-medium">Cash on delivery</span>
+                            <span class="ml-auto text-sm text-gray-400"><i
+                                    class="fas fa-money-bill-wave text-lg"></i></span>
+                        </label>
+                    </div>
+
+                    <!-- VISA / card details section (appears only when 'card' is selected) -->
+                    <div id="cardDetailsSection"
+                        class="mt-6 p-5 border border-gray-200 rounded-xl bg-(--bg) card-details">
+                        <h3 class="font-medium text-(--main-text) mb-3 flex items-center"><i
+                                class="fab fa-cc-visa text-2xl mr-2 text-blue-600"></i> Card information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-(--main-text) mb-1">Card number</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium  text-(--main-text) mb-1">Cardholder
+                                    name</label>
+                                <input type="text" id="cardName" placeholder="John Doe" required
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200">
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium  text-(--main-text) mb-1">Expiry
+                                        (MM/YY)</label>
+                                    <input type="month" required id="monthPicker" class="w-full border border-gray-300 rounded-xl px-4 py-2 
+                                                     focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                                     focus:border-blue-500 transition" required />
+                                    <!-- <input type="text" id="expiry" placeholder="MM/YY"
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200"> -->
+                                </div>
+                                <div class="w-24">
+                                    <label class="block text-sm font-medium  text-(--main-text) mb-1">CCV</label>
+                                    <input type="text" id="ccv" placeholder="123" maxlength="4" required
+                                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200">
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3"><i class="fas fa-lock mr-1"></i> Test mode: 4242 4242 4242
+                            4242
+                        </p>
+                        <p class="text-red-800 text-sm mt-3" id="errorMessage"></p>
+                    </div>
+
+                    <div class="mt-4 text-sm text-gray-500"><i class="fas fa-chevron-right text-blue-400 mr-1"></i> Both
+                        methods
+                        work, card fields are optional for demo.</div>
+                </div>
+
+                <!-- STEP 3: CONFIRM ORDER -->
+                <div id="panel3" class="step-panel">
+                    <h2 class="text-xl font-semibold  text-(--main-text) mb-5">✅ Confirm your order</h2>
+                    <div class="bg-(--bg) rounded-xl p-5 space-y-4 border border-gray-200 mb-10">
+                        <h3 class="font-semibold  text-(--main-text) border-gray-200 border-b pb-2">Shipping details
+                        </h3>
+                        <div id="confirmShipping" class="text-sm  text-(--main-text) grid grid-cols-2 gap-2"></div>
+                        <h3 class="font-semibold  text-(--main-text) border-gray-200 border-b pb-2 mt-2">Payment method
+                        </h3>
+                        <div id="confirmPayment" class="text-sm  text-(--main-text)"></div>
+                        <!-- additional card summary if visa chosen -->
+                        <div id="confirmCardExtra"
+                            class="text-sm  text-(--main-text) border-t border-gray-200 pt-2 mt-1 hidden"></div>
+                        <p class="text-xs text-gray-400 mt-3">By confirming you agree to our terms.</p>
+                    </div>
+                    <div class=" w-full bg-(--bg) rounded-xl p-5 h-fit border border-gray-200 ">
+                        <h2 class="text-lg font-bold text-(--main-text) mb-4 flex items-center"><i
+                                class="fas fa-shopping-bag mr-2 text-blue-500"></i>Your order</h2>
+
+                        <!-- sample order items -->
+                        <div class="space-y-3 mb-4" id="orders">
+                            <div class="flex justify-between text-sm">
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium">1x</span>
+                                    <div>
+                                        <p class="font-medium text-(--main-text)">Wireless Headphones</p>
+                                        <p class="text-xs text-gray-400">Sony WH-1000XM4</p>
+                                    </div>
+                                </div>
+                                <span class="font-medium">$299.99</span>
+                            </div>
+
+                        </div>
+
+                        <!-- divider & totals -->
+                        <div class="border-t border-gray-200 pt-3 space-y-2 text-sm" id="totalPrice">
+                        </div>
+
+                        <!-- promo / note -->
+                        <div class="mt-4 text-xs text-gray-400 flex items-center gap-1">
+                            <i class="fas fa-truck"></i> Estimated delivery: 3–5 days
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== NAVIGATION BUTTONS ========== -->
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-gray-200">
+                <button id="prevBtn"
+                    class="px-2 md:px-6 py-2 rounded-lg cursor-pointer border border-gray-300 text-(--main-text) font-medium hover:bg-(--bgsecond) transition disabled:opacity-40 disabled:pointer-events-none"
+                    disabled>
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                </button>
+                <div class="text-sm text-(--main-text)" id="stepCounter">Step 1 of 3</div>
+                <button id="nextBtn"
+                    class="px-2 md:px-6 py-2 rounded-lg bg-(--onbg) text-(--bg) font-medium hover:bg-(--sec-text) transition cursor-pointer">
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

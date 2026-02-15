@@ -1,0 +1,377 @@
+@import "tailwindcss";
+
+/* Montserrat font - Bold weight (700) */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Satoshi font - Regular weight (400) */
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Satoshi font - Bold weight (700) */
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ===============================
+   CSS Variables (Theme Colors & Fonts)
+   =============================== */
+:root {
+  /* Core Palette (Soft Neutral) */
+  --bg: #fbfbfc;
+  --onbg: #111111;
+  --bgsecond: #f0f0f2;
+
+  /* Semantic Mappings */
+  --main-bg: #fbfbfc;
+  --sec-bg: #f5f5f5;
+  --main-text: #111111;
+  --sec-text: rgba(17, 17, 17, 0.6);
+  --border: rgba(17, 17, 17, 0.08);
+
+  /* Fonts */
+  --fprim: "Satoshi", sans-serif;
+  --fsecond: "Montserrat", sans-serif;
+}
+
+/* Dark theme overrides (Charcoal Neutral) */
+.dark {
+  --bg: #0f0f11;
+  --onbg: #ededed;
+  --bgsecond: #1c1c1e;
+
+  --main-bg: #0f0f11;
+  --sec-bg: #161618;
+  --main-text: #ededed;
+  --sec-text: rgba(237, 237, 237, 0.6);
+  --border: rgba(237, 237, 237, 0.08);
+}
+
+/* ===============================
+   Global Theme Styles
+   =============================== */
+body {
+  background-color: var(--main-bg);
+  color: var(--onbg);
+  font-family: var(--fprim);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Modern Global Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--onbg);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sec-text);
+}
+
+/* Toast Notifications */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 90%;
+  max-width: 500px;
+  pointer-events: none;
+}
+
+#toast-container>div {
+  pointer-events: auto;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease-in-out;
+}
+
+#toast-container>div.bg-green-500 {
+  background-color: #22c55e !important;
+  opacity: 1 !important;
+}
+
+#toast-container>div.bg-red-500 {
+  background-color: #ef4444 !important;
+  opacity: 1 !important;
+}
+
+#toast-container>div.bg-yellow-500 {
+  background-color: #eab308 !important;
+  opacity: 1 !important;
+}
+
+/* Password visibility eye icon */
+#eye-icon {
+
+  width: 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+/* ===========> Filter styles <=========== */
+
+.section-header.collapsed i {
+  transform: rotate(-180deg);
+}
+
+.section-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.size-item.active {
+  background-color: var(--onbg);
+  color: var(--bg);
+  opacity: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .filters {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    z-index: 1001;
+    background-color: var(--main-bg);
+    transition: left 0.4s ease-in-out;
+    border-right: 1px solid var(--border);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+
+  .show-filter {
+    left: 0 !important;
+  }
+}
+
+.style.active,
+.category.active,
+.gender.active {
+  background-color: var(--bgsecond);
+  border-radius: 18px;
+}
+
+/* ===================>Inputs Range style<=============== */
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  background: var(--onbg);
+  border-radius: 50%;
+  appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  background: var(--onbg);
+  border-radius: 50%;
+}
+
+/* =============> Rating Stars style <============= */
+.rating {
+  --star-size: 20px;
+  --star-color: #ddd;
+  --star-background: #f5b301;
+  display: inline-block;
+  font-size: var(--star-size);
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+  position: relative;
+}
+
+.rating::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg,
+      var(--star-background) calc(var(--rating) / 5 * 100%),
+      var(--star-color) calc(var(--rating) / 5 * 100%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+/*===============  overlay Style ============== */
+@media screen and (max-width: 768px) {
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--border);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 400;
+  }
+}
+
+
+
+/* ===============================
+   Header Navigation Styles
+   =============================== */
+.nav-link {
+  @apply relative text-(--onbg) transition;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 -bottom-1 h-[2px] w-0 bg-current transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.mobile-link {
+  @apply p-2 rounded-md transition hover:bg-(--bgsecond);
+}
+
+/* Scrollbar */
+.container-with-scroll::-webkit-scrollbar {
+  height: 3px;
+}
+
+/* track */
+.container-with-scroll::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 5px;
+}
+
+/* progress */
+.container-with-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.container-with-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ===============================
+   Page Transition Animations
+   =============================== */
+
+@keyframes fadeInFromSide {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-side {
+  animation: fadeInFromSide 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-top {
+  animation: fadeInFromTop 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Staggered animation for children */
+.animate-stagger>* {
+  opacity: 0;
+}
+
+.animate-stagger>*:nth-child(1) {
+  animation: fadeInFromSide 0.6s ease-out 0.1s forwards;
+}
+
+.animate-stagger>*:nth-child(2) {
+  animation: fadeInFromSide 0.6s ease-out 0.2s forwards;
+}
+
+.animate-stagger>*:nth-child(3) {
+  animation: fadeInFromSide 0.6s ease-out 0.3s forwards;
+}
+
+.animate-stagger>*:nth-child(4) {
+  animation: fadeInFromSide 0.6s ease-out 0.4s forwards;
+}
+
+.animate-stagger>*:nth-child(5) {
+  animation: fadeInFromSide 0.6s ease-out 0.5s forwards;
+}
+
+/* ======== Checkout Stepper Styles  */
+.step-connector {
+  height: 2px;
+  background: #e2e8f0;
+  flex: 1 1 auto;
+  margin: 0 0.5rem;
+}
+
+.step-connector.active-connector {
+  background: #3b82f6;
+  /* blue-500 */
+}
+
+/* hide/show steps via JS class */
+.step-panel {
+  display: none;
+}
+
+.step-panel.active-panel {
+  display: block;
+}
+
+/* basic transition for button feedback */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
