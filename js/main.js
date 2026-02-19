@@ -13,7 +13,14 @@ let currentScript;
 
 //Loads an HTML component into a specific element by ID
 async function loadComponent(id, file) {
-  const res = await fetch(`${file}?t=${Date.now()}`);
+  let res;
+  try {
+    res = await fetch(`${file}?t=${Date.now()}`);
+  } catch (err) {
+    // Retry once after a short delay (handles Live Server connection resets)
+    await new Promise(r => setTimeout(r, 300));
+    res = await fetch(`${file}?t=${Date.now()}`);
+  }
   const html = await res.text();
   document.getElementById(id).innerHTML = html;
 }

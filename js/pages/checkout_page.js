@@ -121,6 +121,14 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
         }
         return true;
     }
+    const total = cart.reduce((sum, item) => {
+        const subtotal = item.price * item.qty
+        const afterDiscount = subtotal * (1 - item.discountPercentage / 100)
+        return sum + afterDiscount;
+    }, 0);
+    const finalTotal = total * (1 - savedDiscountPercent);
+    const shippingPrice = finalTotal < 500 && finalTotal > 0 ? 10 : 0;
+
     orders.innerHTML = cart.map(item => {
         return `
         <div class="flex justify-between text-sm">
@@ -131,19 +139,18 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
                     <p class="text-xs text-gray-400">Size: ${item.size}</p>
                 </div>
             </div>
-            <span class="font-medium">$${item.price - item.price * item.discountPercentage / 100}</span>
+            <span class="font-medium">$${item.price * item.qty * (1 - item.discountPercentage / 100)}</span>
         </div>
         `
     }).join('');
-    let cartTotalPrice = cart.reduce((sum, product) => {
-        const discountedPrice = product.price - (product.price * product.discountPercentage / 100);
-        return sum + discountedPrice;
-    }, 0);
-    let shippingPrice = cartTotalPrice < 500 ? 10 : 0;
     totalPrice.innerHTML = `
-    <div class="flex justify-between">
+                             <div class="flex justify-between">
                                 <span class="text-(--main-text)">Subtotal</span>
-                                <span class="font-medium">$${cartTotalPrice}</span>
+                                <span class="font-medium">$${total}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-(--main-text)">Discount</span>
+                                <span class="font-medium text-green-600">$${total * savedDiscountPercent}</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-(--main-text)">Shipping</span>
@@ -151,7 +158,7 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
                             </div>
                             <div class="flex justify-between text-base font-bold border-t border-gray-300 pt-2 mt-1">
                                 <span>Total</span>
-                                <span class="text-blue-600">$${cartTotalPrice + shippingPrice}</span>
+                                <span class="text-blue-600">$${finalTotal + shippingPrice}</span>
                             </div>
     
     
@@ -378,8 +385,11 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
                 paymentMethod: paymentRadios.value,
                 orderDate: new Date(),
                 orderStatus: 'pending',
-                orderTotal: cartTotalPrice + shippingPrice,
-                orderItems: cart
+                orderTotal: finalTotal + shippingPrice,
+                orderItems: cart.map(item => ({
+                    ...item,
+                    price: item.price * (1 - item.discountPercentage / 100) * (1 - savedDiscountPercent)
+                }))
             };
             createOrder(order);
             localStorage.removeItem(user.email);

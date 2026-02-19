@@ -5,6 +5,7 @@ async function init() {
     const params = new URLSearchParams(window.location.hash.split('?')[1]);
     const orderId = params.get('orderId');
 
+
     if (!orderId) {
         window.location.hash = '#home';
         return;
@@ -12,7 +13,7 @@ async function init() {
 
     const order = await checkoutService.getUserOrderById(parseInt(orderId));
 
-    if (!order) {
+    if (!order || !order.id) {
         return;
     }
 

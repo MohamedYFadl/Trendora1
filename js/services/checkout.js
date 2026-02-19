@@ -2,12 +2,12 @@ import { getCurrentUserMail } from '../services/auth_services.js';
 
 // get user orders
 export async function getUserOrder() {
-    const order = localStorage.getItem('order');
+    const orders = localStorage.getItem('orders');
     const userMail = getCurrentUserMail();
-    if (!order) {
+    if (!orders) {
         return [];
     }
-    const userOrder = JSON.parse(order).filter(o => o.email === userMail);
+    const userOrder = JSON.parse(orders).filter(o => o.email === userMail);
     if (!userOrder) {
         return [];
     }
@@ -19,11 +19,11 @@ export async function getUserOrderById(id) {
     if (!userOrder) {
         return [];
     }
-    return userOrder.find(o => o.id === id);
+    return userOrder.find(o => o.id === id) || [];
 }
 //creat order
 export async function createOrder(order) {
-    const orders = JSON.parse(localStorage.getItem('order')) || [];
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
     orders.push(order);
-    localStorage.setItem('order', JSON.stringify(orders));
+    localStorage.setItem('orders', JSON.stringify(orders));
 }

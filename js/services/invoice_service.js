@@ -19,7 +19,7 @@ export function generateInvoice(order) {
 
     // Header
     doc.setFontSize(22);
-    text("STORE Shop.co", 20, 30, { bold: true });
+    text("Trendora Store", 20, 30, { bold: true });
 
     doc.setFontSize(10);
     text("Date: " + new Date(order.orderDate).toLocaleDateString(), 190, 30, { align: 'right' });
@@ -31,6 +31,7 @@ export function generateInvoice(order) {
     text(order.name, 20, 55);
     text(order.address, 20, 60);
     text("Phone: " + order.phone, 20, 65);
+    if (order.email) text("Email: " + order.email, 20, 70);
 
     // Table Header
     doc.setFillColor(245, 245, 245);
