@@ -90,7 +90,6 @@ async function botReply(userMessage) {
             }
 
             const userOrder = Array.isArray(order) ? order : [order];
-            console.log(order);
             let orderHtml = `<div class="space-y-3">
                         <p class="font-medium mb-1">Here are your orders:</p>`;
             userOrder.forEach(item => {
@@ -134,12 +133,17 @@ async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
 
+    const sendMsgBtn = document.getElementById('sendMsgBtn');
+    if (sendMsgBtn) sendMsgBtn.disabled = true;
+
     addMessage(text, 'user');
     userInput.value = '';
 
     setTimeout(async () => {
         const reply = await botReply(text);
         addMessage(reply, 'bot');
+        if (sendMsgBtn) sendMsgBtn.disabled = false;
+        userInput.focus();
     }, 500);
 }
 
@@ -148,8 +152,11 @@ if (sendMsgBtn) {
     sendMsgBtn.addEventListener('click', sendMessage);
 }
 
-userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
+userInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
 });
 
 messages.addEventListener('click', async (e) => {

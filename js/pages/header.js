@@ -1,4 +1,5 @@
-import { getAllProducts } from "../services/product_services.js"
+import { getAllProducts } from "../services/product_services.js";
+import { debounce } from "../Utilities/helpers.js";
 
 const desktopSearchInput = document.getElementById("search-input");
 const desktopResultsContainer = document.getElementById("search-results");
@@ -6,11 +7,9 @@ const mobileSearchInput = document.getElementById("mobile-search-input");
 const mobileResultsContainer = document.getElementById("mobile-search-results");
 const burgerIcon = document.getElementById("burgerIcon");
 const mobileMenu = document.getElementById("mobile-menu");
-const mobileLink = document.querySelectorAll(".mobile-link")
+const mobileLinks = document.querySelectorAll(".mobile-link");
 const allProducts = await getAllProducts();
-console.log(allProducts);
 
-// function for search handling to get product by name
 function handleSearch(inputElement, resultsContainer) {
     const query = inputElement.value.toLowerCase().trim();
     resultsContainer.innerHTML = "";
@@ -28,91 +27,108 @@ function handleSearch(inputElement, resultsContainer) {
     if (filteredProducts.length === 0) {
         const noResults = document.createElement("div");
         noResults.textContent = "No products found";
-        noResults.classList.add(...["p-2", "text-(--onbg)", "text-center"]);
+        noResults.classList.add("p-2", "text-(--onbg)", "text-center", "opacity-60");
         resultsContainer.appendChild(noResults);
     } else {
         filteredProducts.forEach(product => {
             const div = document.createElement("div");
             div.textContent = product.name;
-            div.setAttribute("data-value", product.id);
-            div.classList.add(...["p-3", "cursor-pointer", "hover:bg-(--bgsecond)", "border-b", "border-(--onbg)", "last:border-b-0"]);
+            div.dataset.value = product.id;
+            div.classList.add("p-3", "cursor-pointer", "hover:bg-(--bgsecond)", "border-b", "border-(--onbg)/10", "last:border-b-0", "transition");
+            div.setAttribute('role', 'option');
             resultsContainer.appendChild(div);
 
             div.addEventListener("click", function () {
-                window.location.href = `/index.html#product?id=${div.dataset.value}`;
+                window.location.href = `#product?id=${div.dataset.value}`;
                 resultsContainer.innerHTML = '';
                 inputElement.value = "";
+                resultsContainer.classList.add("hidden");
                 if (resultsContainer === mobileResultsContainer) {
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                    mobileMenu?.classList.add('scale-y-0', 'opacity-0');
+                    burgerIcon?.setAttribute('aria-expanded', 'false');
                 }
+            });
+
+            div.addEventListener("keydown", (e) => {
+                if (e.key === 'Enter') div.click();
             });
         });
     }
 
     resultsContainer.classList.remove("hidden");
 }
-//search input desktop
-desktopSearchInput.addEventListener("input", () => {
+
+const debouncedSearchDesktop = debounce(() => {
     handleSearch(desktopSearchInput, desktopResultsContainer);
-});
-desktopSearchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        const query = desktopSearchInput.value.trim();
-        if (query) {
-            window.location.href = `index.html#products?search=${encodeURIComponent(query)}`;
-            desktopResultsContainer.innerHTML = "";
-            // If already on products page, products.js handles the input event, 
-            // but we might want to ensure the url updates.
-            // Actually, products.js updates the filter state. 
-            // But changing hash manually re-triggers router? 
-            // Ideally products.js listens to hashchange? 
-            // No, products.js runs once. 
-            // But my products.js doesn't listen to hash change for filter updates, it listens to input.
-            // If I change hash here, router reloads the component. 
-            // This is good for "Enter" behavior.
-        }
-    }
-});
+}, 200);
 
-//search input mobile
-mobileSearchInput.addEventListener("input", () => {
+const debouncedSearchMobile = debounce(() => {
     handleSearch(mobileSearchInput, mobileResultsContainer);
-});
-mobileSearchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        const query = mobileSearchInput.value.trim();
-        if (query) {
-            window.location.href = `index.html#products?search=${encodeURIComponent(query)}`;
-            mobileResultsContainer.innerHTML = "";
-            mobileMenu.classList.add('scale-y-0', 'opacity-0');
+}, 200);
+
+if (desktopSearchInput) {
+    desktopSearchInput.addEventListener("input", debouncedSearchDesktop);
+    desktopSearchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const query = desktopSearchInput.value.trim();
+            if (query) {
+                window.location.href = `#products?search=${encodeURIComponent(query)}`;
+                desktopResultsContainer.innerHTML = "";
+                desktopResultsContainer.classList.add("hidden");
+            }
         }
-    }
-});
-//hide the results if the user click outside the result container
+    });
+}
+
+if (mobileSearchInput) {
+    mobileSearchInput.addEventListener("input", debouncedSearchMobile);
+    mobileSearchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const query = mobileSearchInput.value.trim();
+            if (query) {
+                window.location.href = `#products?search=${encodeURIComponent(query)}`;
+                mobileResultsContainer.innerHTML = "";
+                mobileResultsContainer.classList.add("hidden");
+                mobileMenu?.classList.add('scale-y-0', 'opacity-0');
+                burgerIcon?.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+}
+
 document.addEventListener("click", (e) => {
-    if (!desktopSearchInput.contains(e.target) && !desktopResultsContainer.contains(e.target)) {
+    if (desktopSearchInput && !desktopSearchInput.contains(e.target) && !desktopResultsContainer?.contains(e.target)) {
         desktopResultsContainer.innerHTML = "";
+        desktopResultsContainer?.classList.add("hidden");
     }
-    if (!mobileSearchInput.contains(e.target) && !mobileResultsContainer.contains(e.target)) {
+    if (mobileSearchInput && !mobileSearchInput.contains(e.target) && !mobileResultsContainer?.contains(e.target)) {
         mobileResultsContainer.innerHTML = "";
+        mobileResultsContainer?.classList.add("hidden");
     }
 });
 
-burgerIcon.addEventListener("click", function () {
-    mobileMenu.classList.toggle('scale-y-0');
-    mobileMenu.classList.toggle('opacity-0');
-})
-mobileLink.forEach(link => {
-    link.addEventListener("click", function () {
+if (burgerIcon && mobileMenu) {
+    burgerIcon.addEventListener("click", function () {
+        const isOpen = !mobileMenu.classList.contains('scale-y-0');
         mobileMenu.classList.toggle('scale-y-0');
         mobileMenu.classList.toggle('opacity-0');
+        this.setAttribute('aria-expanded', !isOpen);
+    });
+}
 
-    })
-})
+mobileLinks.forEach(link => {
+    link.addEventListener("click", function () {
+        mobileMenu?.classList.add('scale-y-0', 'opacity-0');
+        burgerIcon?.setAttribute('aria-expanded', 'false');
+    });
+});
 
-
-
-
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu && !mobileMenu.classList.contains('scale-y-0')) {
+        mobileMenu.classList.add('scale-y-0', 'opacity-0');
+        burgerIcon?.setAttribute('aria-expanded', 'false');
+        burgerIcon?.focus();
+    }
+});

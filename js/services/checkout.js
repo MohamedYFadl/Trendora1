@@ -1,4 +1,4 @@
-import { getCurrentUserMail } from '../services/auth_services.js';
+import { getCurrentUserMail } from './auth_services.js';
 
 // get user orders
 export async function getUserOrder() {

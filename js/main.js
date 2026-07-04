@@ -3,51 +3,38 @@ import { routes } from "./config/routes.js";
 import { initTheme } from "./Utilities/theme.js";
 import { renderAuthButtons } from "./Utilities/renderAuthButtons.js";
 import * as authService from "./services/auth_services.js";
-import { getAllProducts } from "./services/product_services.js";
-// import * as checkout from './services/checkout.js';
+import { massage } from "./Utilities/helpers.js";
 
-// checkout.setOrderDefault();
-
-// Reference to the currently loaded page script
 let currentScript;
 
-//Loads an HTML component into a specific element by ID
 async function loadComponent(id, file) {
-  let res;
+  const el = document.getElementById(id);
+  if (!el) return;
   try {
-    res = await fetch(`${file}?t=${Date.now()}`);
+    const res = await fetch(`${file}?t=${Date.now()}`);
+    if (!res.ok) throw new Error(`Failed to load ${file}`);
+    el.innerHTML = await res.text();
   } catch (err) {
-    // Retry once after a short delay (handles Live Server connection resets)
-    await new Promise(r => setTimeout(r, 300));
-    res = await fetch(`${file}?t=${Date.now()}`);
+    el.innerHTML = `<div class="p-8 text-center text-(--onbg)/50">Failed to load content. <button class="underline cursor-pointer" onclick="location.reload()">Reload page</button></div>`;
   }
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
 }
 
-// Dynamically loads a JavaScript module for the current page
-// Removes the previous script to avoid conflicts
 function loadJS(src) {
   if (currentScript) currentScript.remove();
   if (!src) return;
-
   currentScript = document.createElement("script");
-  currentScript.src = `${src}?t=${Date.now()}`; // Cache busting
+  currentScript.src = `${src}?t=${Date.now()}`;
   currentScript.type = "module";
   document.body.appendChild(currentScript);
 }
 
-// Extracts the current page name from the URL hash Defaults to 'home'
 function getPage() {
   return location.hash.split("?")[0].replace("#", "") || "home";
 }
 
-// Main router function
-// Handles page navigation and layout visibility
 async function router() {
   const page = getPage();
 
-  // Redirect based on authentication status
   if (authService.isAuthenticated()) {
     if (page === "login" || page === "register") {
       window.location.hash = "#home";
@@ -56,39 +43,23 @@ async function router() {
   }
 
   const route = routes[page] || routes.home;
-
-  // Elements that should be hidden on login/register pages
-  const header = document.getElementById("header");
-  const footer = document.getElementById("footer");
   const chatbot = document.getElementById("chatbot");
 
-  // Hide layout elements on auth pages
   if (page === "login" || page === "register") {
-    // if (header) header.style.display = 'none';
-    // if (footer) footer.style.display = 'none';
     if (chatbot) chatbot.style.display = "none";
   } else {
-    // if (header) header.style.display = 'block';
-    // if (footer) footer.style.display = 'block';
-
     if (chatbot) chatbot.style.display = "block";
   }
 
-  // Render login/logout buttons
   renderAuthButtons();
 
-  // Load page HTML and JavaScript
   await loadComponent("content", route.html);
 
-  // Apply entry animations to main sections
   const content = document.getElementById("content");
   if (content) {
     const mainSections = content.querySelectorAll("section");
     mainSections.forEach((section, index) => {
-      // Add staggered delay
-      section.style.animationDelay = `${index * 0.4}s`;
-
-      // Alternate animations for visual variety
+      section.style.animationDelay = `${index * 0.2}s`;
       const animationClass = index % 2 === 0 ? "animate-side" : "animate-top";
       section.classList.add(animationClass);
     });
@@ -97,32 +68,53 @@ async function router() {
   loadJS(route.js);
 }
 
-// Load header and initialize theme
-
-loadComponent("header", "html/header.html").then(() => {
+// Init
+(async function init() {
+  await loadComponent("header", "html/header.html");
   initTheme();
   renderAuthButtons();
-  const script = document.createElement("script");
-  script.src = "js/pages/header.js"
-  script.type = "module";
-  document.body.appendChild(script);
-});
+  loadJS("js/pages/header.js");
 
-// Load footer
+  await loadComponent("footer", "html/footer.html");
 
-loadComponent("footer", "html/footer.html");
+  const page = getPage();
+  if (page !== "login" && page !== "register") {
+    await loadComponent("chatbot", "html/chatbot.html");
+    loadJS("js/pages/chatbot.js");
+  }
 
-// Load chatbot only if not on auth pages
-if (getPage() !== "login" && getPage() !== "register") {
-  loadComponent("chatbot", "html/chatbot.html").then(() => {
-    const script = document.createElement("script");
-    script.src = "js/pages/chatbot.js?t=" + Date.now();
-    script.type = "module";
-    document.body.appendChild(script);
+  router();
+})();
+
+window.addEventListener("hashchange", router);
+
+// --- Back to top ---
+const backToTop = document.getElementById("back-to-top");
+if (backToTop) {
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 400) {
+          backToTop.classList.remove("opacity-0", "invisible", "translate-y-4");
+        } else {
+          backToTop.classList.add("opacity-0", "invisible", "translate-y-4");
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
-router();
-
-// Re-run router when URL hash changes
-window.addEventListener("hashchange", router);
+// --- Online/offline detection ---
+window.addEventListener("offline", () => {
+  massage("You are offline. Some features may be unavailable.", "warning");
+});
+window.addEventListener("online", () => {
+  massage("Connection restored.", "success");
+});

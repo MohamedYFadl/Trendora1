@@ -8,8 +8,11 @@
                     <p class="mt-2 text-(--onbg)/70">Loading cart...</p>
                 </div>
                 <div id="cartItems" class="space-y-4"></div>
-                <div id="emptyCart" class="hidden text-center py-12 opacity-50">
-                    <p>Your cart is empty</p>
+                <div id="emptyCart" class="hidden text-center py-12" role="status">
+                    <i class="fa-solid fa-cart-shopping text-4xl text-(--onbg)/20 mb-4"></i>
+                    <p class="text-lg font-medium text-(--onbg)/60">Your cart is empty</p>
+                    <p class="text-sm text-(--onbg)/40 mt-1">Start shopping to add items to your cart.</p>
+                    <a href="#products" class="mt-4 inline-block px-6 py-2 bg-(--onbg) text-(--bg) rounded-full text-sm font-bold transition hover:opacity-90">Browse Products</a>
                 </div>
             </div>
 

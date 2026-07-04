@@ -30,12 +30,6 @@ export async function getProductsByCategoryId(categoryId) {
   const filteredProducts = products.filter(product => product.categoryId == categoryId)
   return filteredProducts;
 }
-//get category by name [Not used anywhere]
-export async function getCategoryByName(categoryName) {
-  const categories = await getAllCategories();
-  return categories.find((category) => category.name == categoryName);
-}
-
 // get all reviews [Used in home]
 export async function getAllReviews() {
   const products = await getAllProducts();
@@ -62,23 +56,12 @@ export async function getReviewsByProductId(productId) {
   return [...jsonReviews, ...filteredLocalReviews];
 }
 
-// get product by count [Not Used]
-export async function getProductByCount(start, end) {
-  const products = await getAllProducts();
-  return products.slice(start, end);
-}
-
 //Used in product details
 export async function countReviews(productId) {
   const reviews = await getReviewsByProductId(productId);
   return reviews.length;
 }
 
-// get discount [Not Used]
-export async function getDiscount(productId) {
-  const product = await getProductById(productId);
-  return product ? product.discount : 0;
-}
 // Used in products
 export async function getCategoryById(categoryId) {
   const categories = await getAllCategories();

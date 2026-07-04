@@ -7,8 +7,6 @@ let cart = [];
 
 if (user) {
     cart = await cartServices.getCart(user.email);
-    console.log(cart);
-
 } else {
     window.location.hash = '#login';
 }
@@ -366,23 +364,21 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
         if (currentStep > 1) goToStep(currentStep - 1);
     });
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', async () => {
         if (currentStep < 3) {
             goToStep(currentStep + 1);
         } else if (currentStep === 3) {
-            // final order placement
-            // potentially re-validate everything one last time?
-            // Since we are on step 3, step 1 and 2 "should" be valid.
-            // But let's leave it as is for now.
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Placing Order...`;
             updateConfirmation();
-            massage('Order Placed Successfully! Thank you for shopping with us.', 'success');
+
             const order = {
                 id: Date.now(),
                 name: fullName.value,
                 email: user.email,
                 phone: mobile.value,
                 address: `${region.value}, ${city.value}, ${street.value}, ${building.value}`,
-                paymentMethod: paymentRadios.value,
+                paymentMethod: Array.from(paymentRadios).find(r => r.checked)?.value || 'card',
                 orderDate: new Date(),
                 orderStatus: 'pending',
                 orderTotal: finalTotal + shippingPrice,
@@ -395,7 +391,10 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
             localStorage.removeItem(user.email);
             localStorage.removeItem('appliedDiscount');
 
-            window.location.hash = `#payment?orderId=${order.id}`;
+            setTimeout(() => {
+                massage('Order Placed Successfully! Thank you for shopping with us.', 'success');
+                window.location.hash = `#payment?orderId=${order.id}`;
+            }, 500);
         }
     });
 
