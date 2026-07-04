@@ -68,6 +68,13 @@ async function router() {
   loadJS(route.js);
 }
 
+function hideSplash() {
+  const splash = document.getElementById("splash-screen");
+  if (!splash) return;
+  splash.classList.add("hidden");
+  setTimeout(() => splash.remove(), 500);
+}
+
 // Init
 (async function init() {
   await loadComponent("header", "html/header.html");
@@ -83,7 +90,8 @@ async function router() {
     loadJS("js/pages/chatbot.js");
   }
 
-  router();
+  await router();
+  hideSplash();
 })();
 
 window.addEventListener("hashchange", router);
