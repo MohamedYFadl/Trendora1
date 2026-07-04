@@ -443,7 +443,7 @@ button:disabled {
   animation-delay: 0.32s;
 }
 
-#splash-screen.hidden {
+#splash-screen.splash-hidden {
   opacity: 0;
   pointer-events: none;
 }

@@ -52,3 +52,4 @@ function initLogin() {
 }
 
 initLogin();
+document.dispatchEvent(new CustomEvent("page-ready"));

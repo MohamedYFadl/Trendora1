@@ -375,4 +375,4 @@ function formatDate(dateStr) {
     return dateStr.slice(0, 10).split('-').reverse().join('-');
 }
 
-init();
+init().finally(() => document.dispatchEvent(new CustomEvent("page-ready")));

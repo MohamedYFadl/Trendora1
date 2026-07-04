@@ -57,3 +57,4 @@ function initRegister() {
 }
 
 initRegister();
+document.dispatchEvent(new CustomEvent("page-ready"));

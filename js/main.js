@@ -6,6 +6,9 @@ import * as authService from "./services/auth_services.js";
 import { massage } from "./Utilities/helpers.js";
 
 let currentScript;
+let pageReady;
+const pageReadyPromise = new Promise(resolve => { pageReady = resolve; });
+document.addEventListener("page-ready", pageReady, { once: true });
 
 async function loadComponent(id, file) {
   const el = document.getElementById(id);
@@ -71,8 +74,15 @@ async function router() {
 function hideSplash() {
   const splash = document.getElementById("splash-screen");
   if (!splash) return;
-  splash.classList.add("hidden");
+  splash.classList.add("splash-hidden");
   setTimeout(() => splash.remove(), 500);
+}
+
+function waitForPageReady() {
+  return Promise.race([
+    pageReadyPromise,
+    new Promise(resolve => setTimeout(resolve, 10000))
+  ]);
 }
 
 // Init
@@ -90,7 +100,8 @@ function hideSplash() {
     loadJS("js/pages/chatbot.js");
   }
 
-  await router();
+  router();
+  await waitForPageReady();
   hideSplash();
 })();
 

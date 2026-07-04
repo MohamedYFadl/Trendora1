@@ -45,9 +45,9 @@ function handleSearch(inputElement, resultsContainer) {
                 resultsContainer.classList.add("hidden");
                 if (resultsContainer === mobileResultsContainer) {
                     mobileMenu?.classList.add('scale-y-0', 'opacity-0');
-                    burgerIcon?.setAttribute('aria-expanded', 'false');
-                }
-            });
+    burgerIcon?.setAttribute('aria-expanded', 'false');
+  }
+});
 
             div.addEventListener("keydown", (e) => {
                 if (e.key === 'Enter') div.click();

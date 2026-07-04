@@ -462,3 +462,5 @@ let savedDiscountPercent = JSON.parse(localStorage.getItem('appliedDiscount')) |
         input.min = `${year}-${month}`;
     });
 })();
+
+document.dispatchEvent(new CustomEvent("page-ready"));

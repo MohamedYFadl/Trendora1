@@ -39,4 +39,4 @@ async function init() {
     }
 }
 
-init();
+init().finally(() => document.dispatchEvent(new CustomEvent("page-ready")));

@@ -399,3 +399,5 @@ const closeBtn = document.getElementById("closeBtn");
 
 showFilter?.addEventListener("click", () => filterSideBar?.classList.toggle("show-filter"));
 closeBtn?.addEventListener("click", () => filterSideBar?.classList.remove("show-filter"));
+
+document.dispatchEvent(new CustomEvent("page-ready"));

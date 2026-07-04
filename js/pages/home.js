@@ -139,4 +139,5 @@ function createProductCard(product) {
       }
     });
   }
+  document.dispatchEvent(new CustomEvent("page-ready"));
 })();

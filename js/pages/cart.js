@@ -266,4 +266,4 @@ function setupEventListeners() {
     }
 }
 
-init();
+init().finally(() => document.dispatchEvent(new CustomEvent("page-ready")));
